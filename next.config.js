@@ -6,10 +6,12 @@
 const configImage = require("./config/images");
 
 const nextConfig = {
+  // distDir: 'build',
   reactStrictMode: true,
   optimizeFonts: false,
   // swcMinify: true,
   images: {
+    unoptimized: true,
     ...configImage,
     formats: ["image/avif", "image/webp"],
   },
