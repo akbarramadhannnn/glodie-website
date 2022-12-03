@@ -5,6 +5,7 @@ import Gambar2 from "../../../public/images/gambar2.png";
 import Gambar3 from "../../../public/images/gambar3.png";
 import BannerGradient1 from "../../../public/images/banner-gradient1.png";
 import BannerGradientResponsive from "../../../public/images/banner-responsive-home.png";
+import BannerGradientIpad from "../../../public/images/ipad-banner-home.png";
 import TwitterYellowSVG from "../../../public/svg/twitter-yellow.svg";
 import DiscordSVG from "../../../public/svg/discord.svg";
 import ArrowUpSVG from "../../../public/svg/arrow-up.svg";
@@ -14,6 +15,7 @@ import ArrowSVG from "../../../public/svg/arrow.svg";
 import SectionBanner, {
   ImageBannerDekstop,
   ImageBannerMobile,
+  ImageBannerIpad,
   ImageTextWrapperBanner,
   FlexTextBanner,
   AreaButtonWrapperBanner,
@@ -30,13 +32,13 @@ import SectionCollections from "./components/SectionCollections";
 import SectionFaq from "./components/SectionFaq";
 import { Head, Image } from "../../../components";
 
-const Home = (props) => {
+const Home = () => {
   const [accordionIndex, setAccordionIndex] = useState("");
   const [faqData] = useState([
     {
       title: "What is the total supply of Glodies and Kiddies collections?",
       decription:
-        "There will be 450 Glodies and 450 Kiddies, so total supply for V1 would be 300 NFTS.",
+        "There will be 150 Glodies and 150 Kiddies, so total supply for V1 would be 300 NFTS.",
     },
     {
       title: "What`s the diferrence between Alglodieloggy and Kiddie Glodie?",
@@ -73,7 +75,7 @@ const Home = (props) => {
 
   return (
     <Fragment>
-      <Head title="Glodie | Home" urlLink={props.urlPath} />
+      <Head title="Glodie | Home" urlLink="/" />
 
       <SectionBanner
       // className="h-30xl pl-5 pr-5 lg:pl-16 lg:pr-16 xl:pl-40 xl:pr-40 flex items-center"
@@ -82,6 +84,10 @@ const Home = (props) => {
         <ImageBannerMobile
           src={BannerGradientResponsive.src}
           alt="BannerGradientResponsive"
+        />
+        <ImageBannerIpad
+          src={BannerGradientIpad.src}
+          alt="BannerGradientIpad"
         />
 
         <ImageTextWrapperBanner>

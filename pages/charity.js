@@ -1,19 +1,20 @@
-import { Fragment, useCallback, useState } from "react";
-import Gambar10 from "../public/images/gambar10.jpg";
-import Gambar11 from "../public/images/gambar11.jpg";
-import Gambar12 from "../public/images/gambar12.png";
-import Gambar13 from "../public/images/gambar13.jpg";
-import Gambar14 from "../public/images/gambar14.png";
-import Gambar15 from "../public/images/gambar15.jpg";
-import Gambar16 from "../public/images/gambar16.png";
-import Gambar17 from "../public/images/gambar17.png";
-import Gambar18 from "../public/images/gambar18.jpg";
-import Gambar19 from "../public/images/gambar19.jpg";
-import Gambar20 from "../public/images/gambar20.jpg";
-import Gambar21 from "../public/images/gambar21.jpg";
-import Gambar22 from "../public/images/gambar22.jpg";
+import { Fragment, useCallback, useEffect, useState } from "react";
+// import Gambar10 from "../public/images/gambar10.jpg";
+// import Gambar11 from "../public/images/gambar11.jpg";
+// import Gambar12 from "../public/images/gambar12.png";
+// import Gambar13 from "../public/images/gambar13.jpg";
+// import Gambar14 from "../public/images/gambar14.png";
+// import Gambar15 from "../public/images/gambar15.jpg";
+// import Gambar16 from "../public/images/gambar16.png";
+// import Gambar17 from "../public/images/gambar17.png";
+// import Gambar18 from "../public/images/gambar18.jpg";
+// import Gambar19 from "../public/images/gambar19.jpg";
+// import Gambar20 from "../public/images/gambar20.jpg";
+// import Gambar21 from "../public/images/gambar21.jpg";
+// import Gambar22 from "../public/images/gambar22.jpg";
 import Banner from "../public/images/banner-charity-desktop.png";
 import BannerMobile from "../public/images/banner-charity-responsive.png";
+import BannerIpad from "../public/images/ipad-banner-charity.png";
 import ArrowLeft from "../public/svg/arrow-purple-left.svg";
 import ArrowRight from "../public/svg/arrow-purple-right.svg";
 import { Head, Image } from "../components";
@@ -21,63 +22,78 @@ import { ApiGetDonationsLists } from "../api/donations";
 
 const Charity = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [donationsData, setDonationsData] = useState([]);
 
-  const [data, setData] = useState([
-    {
-      name: "AlglodieLoggy X Al Goanna collab auction, won by *Lux22Gott.algo* at 144A.",
-      images1: Gambar18,
-      images2: Gambar10,
-    },
-    {
-      name: "Kiddie Glodie X Alex NFTs collab auction, won by *algoistheway.algo* at 300A.",
-      images1: Gambar19,
-      images2: Gambar12,
-    },
-    {
-      name: "Kiddie Glodie X Graffe collab auction, won by *Lux22Gott.algo* at 530A.",
-      images1: Gambar11,
-      images2: Gambar13,
-    },
-    {
-      name: "Kiddie Glodie X AoA collab auction, won by *Domes.algo* at 100A.",
-      images1: Gambar20,
-      images2: Gambar14,
-    },
-    {
-      name: "Kiddie Glodie charity auction, won by *Iron.algo* at 180A.",
-      images1: Gambar21,
-      images2: Gambar15,
-    },
-    {
-      name: "Kiddie Glodie charity auction, won by *Error404.algo* at 127A.",
-      images1: Gambar11,
-      images2: Gambar16,
-    },
-    {
-      name: "Kiddie Glodie x YBG collab auction, won by *Adithimawan* at 182A.",
-      images1: Gambar22,
-      images2: Gambar17,
-    },
-  ]);
+  useEffect(() => {
+    const FetchData = async () => {
+      const response = await ApiGetDonationsLists();
+      if (response?.status === 200) {
+        setDonationsData(response.result.data);
+      }
+    };
+    FetchData();
+  }, []);
+
+  // const [data, setData] = useState([
+  //   {
+  //     name: "AlglodieLoggy X Al Goanna collab auction, won by *Lux22Gott.algo* at 144A.",
+  //     images1: Gambar18,
+  //     images2: Gambar10,
+  //   },
+  //   {
+  //     name: "Kiddie Glodie X Alex NFTs collab auction, won by *algoistheway.algo* at 300A.",
+  //     images1: Gambar19,
+  //     images2: Gambar12,
+  //   },
+  //   {
+  //     name: "Kiddie Glodie X Graffe collab auction, won by *Lux22Gott.algo* at 530A.",
+  //     images1: Gambar11,
+  //     images2: Gambar13,
+  //   },
+  //   {
+  //     name: "Kiddie Glodie X AoA collab auction, won by *Domes.algo* at 100A.",
+  //     images1: Gambar20,
+  //     images2: Gambar14,
+  //   },
+  //   {
+  //     name: "Kiddie Glodie charity auction, won by *Iron.algo* at 180A.",
+  //     images1: Gambar21,
+  //     images2: Gambar15,
+  //   },
+  //   {
+  //     name: "Kiddie Glodie charity auction, won by *Error404.algo* at 127A.",
+  //     images1: Gambar11,
+  //     images2: Gambar16,
+  //   },
+  //   {
+  //     name: "Kiddie Glodie x YBG collab auction, won by *Adithimawan* at 182A.",
+  //     images1: Gambar22,
+  //     images2: Gambar17,
+  //   },
+  // ]);
 
   const handleClickPrevious = useCallback(() => {
     const index = activeIndex - 1;
     if (index !== -1) {
       setActiveIndex(index);
+    } else {
+      setActiveIndex(donationsData.length - 1);
     }
-  }, [activeIndex]);
+  }, [activeIndex, donationsData]);
 
   const handleClickNext = useCallback(() => {
     const index = activeIndex + 1;
-    if (index < props.dataDonations.length) {
+    if (index < donationsData.length) {
       // if (index < data.length) {
       setActiveIndex(index);
+    } else {
+      setActiveIndex(0);
     }
-  }, [activeIndex, props.dataDonations]);
+  }, [activeIndex, donationsData]);
 
   return (
     <Fragment>
-      <Head title="Glodie | Charity" urlLink={props.urlPath} />
+      <Head title="Glodie | Charity" urlLink={"/charity"} />
 
       <section
         className="relative h-26xl sm:h-26xl md:h-42xl lg:h-30xl"
@@ -91,9 +107,14 @@ const Charity = (props) => {
           alt="Banner"
         />
         <Image
-          className="w-full h-full lg:hidden"
+          className="w-full h-full md:hidden lg:hidden"
           src={BannerMobile}
           alt="BannerMobile"
+        />
+        <Image
+          className="w-full h-full hidden md:block lg:hidden"
+          src={BannerIpad}
+          alt="BannerIpad"
         />
 
         <div className="pl-5 pr-5 lg:pl-16 lg:pr-16 xl:pl-40 xl:pr-26 flex items-center lg:w-2/4 h-16xl sm:h-16xl md:h-28xl lg:h-full absolute top-0">
@@ -150,50 +171,48 @@ const Charity = (props) => {
 
         <div className="w-full h-full flex flex-col justify-between items-center mt-8">
           <div className="flex flex-wrap justify-center lg:justify-start">
-            {props.dataDonations.lenght > 0 &&
-              props.dataDonations[activeIndex].title
-                .split(" ")
-                .map((text, i) => (
-                  // {data[activeIndex].name.split(" ").map((text, i) => (
-                  <h2
-                    key={i}
-                    className={`text-base sm:text-base md:text-3xl lg:text-2xl font-dynapuff text-purple1 mr-1.5 ${
-                      /[*]/.test(text) ? "font-bold" : "font-regular"
-                    }`}
-                  >
-                    {text.replace(/[*]/g, "")}{" "}
-                  </h2>
-                ))}
+            {donationsData.length > 0 &&
+              donationsData[activeIndex].title.split(" ").map((text, i) => (
+                // {data[activeIndex].name.split(" ").map((text, i) => (
+                <h2
+                  key={i}
+                  className={`text-base sm:text-base md:text-3xl lg:text-2xl font-dynapuff text-purple1 mr-1.5 ${
+                    /[*]/.test(text) ? "font-bold" : "font-regular"
+                  }`}
+                >
+                  {text.replace(/[*]/g, "")}{" "}
+                </h2>
+              ))}
           </div>
 
-          {props.dataDonations.lenght > 0 && (
+          {donationsData.length > 0 && (
             <div className="w-full flex justify-between items-center mt-6 mb-6">
               <button onClick={handleClickPrevious}>
                 <ArrowLeft className="h-8 w-8 sm:h-8 sm:w-8 md:h-24 md:w-24 xl:h-10 xl:w-10" />
               </button>
               <div
-                className="h-26xl md:h-56xl lg:h-full w-5/6 justify-between flex flex-col-reverse lg:flex-row pl-5 pr-5 md:pl-10 md:pr-10 lg:pl-0 lg:pr-0"
+                className="w-5/6 justify-between flex flex-col-reverse lg:flex-row pl-5 pr-5 md:pl-10 md:pr-10 lg:pl-0 lg:pr-0"
                 // style={{ backgroundColor: "red" }}
               >
                 {/* <div className="mr-3 ml-3 xl:mr-8 w-full sm:w-full"> */}
                 <div>
                   <Image
-                    src={props.dataDonations[activeIndex].sertificateImagePath}
+                    src={donationsData[activeIndex].sertificateImagePath}
                     // src={data[activeIndex].images1}
                     alt="images"
-                    className="lg:h-20xl"
+                    className="w-full h-full lg:h-20xl"
                     width={500}
                     height={500}
                   />
                 </div>
 
                 {/* <div className="hidden sm:hidden xl:block"> */}
-                <div>
+                <div className="mb-10 md:mb-14 lg:mb-0">
                   <Image
-                    src={props.dataDonations[activeIndex].glodieImagePath}
+                    src={donationsData[activeIndex].glodieImagePath}
                     // src={data[activeIndex].images2}
                     alt="images"
-                    className="w-full h-full md:w-full md:h-30xl lg:w-20xl lg:h-20xl"
+                    className="w-full h-full md:w-full md:h-full lg:w-20xl lg:h-20xl"
                     width={500}
                     height={500}
                   />
@@ -209,8 +228,8 @@ const Charity = (props) => {
             className="flex justify-center items-center"
             // className="w-10xl md:w-14xl lg:w-10xl flex justify-center items-center"
           >
-            {props.dataDonations.lenght > 0 &&
-              props.dataDonations.map((_, i) => {
+            {donationsData.length > 0 &&
+              donationsData.map((_, i) => {
                 // {data.map((_, i) => {
                 return (
                   <div
@@ -221,7 +240,7 @@ const Charity = (props) => {
                         ? "opacity-100 w-5 h-5 md:w-7 md:h-7 lg:w-5 lg:h-5"
                         : "opacity-50 w-3 h-3 md:w-4 md:h-4 lg:w-3 lg:h-3"
                     }
-                    ${props.dataDonations.length - 1 === i ? "mr-0" : "mr-2"}
+                    ${donationsData.length - 1 === i ? "mr-0" : "mr-2"}
                   `}
                   />
                 );
@@ -296,15 +315,15 @@ const Charity = (props) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const response = await ApiGetDonationsLists();
-  let dataDonations = [];
-  if (response?.status === 200) {
-    dataDonations = response.result.data;
-  }
-  return {
-    props: { urlPath: context.resolvedUrl, dataDonations },
-  };
-}
+// export async function getServerSideProps(context) {
+//   const response = await ApiGetDonationsLists();
+//   let dataDonations = [];
+//   if (response?.status === 200) {
+//     dataDonations = response.result.data;
+//   }
+//   return {
+//     props: { urlPath: context.resolvedUrl, dataDonations },
+//   };
+// }
 
 export default Charity;

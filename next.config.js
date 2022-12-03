@@ -6,7 +6,7 @@
 const configImage = require("./config/images");
 
 const nextConfig = {
-  // distDir: 'build',
+  distDir: 'build',
   reactStrictMode: true,
   optimizeFonts: false,
   // swcMinify: true,

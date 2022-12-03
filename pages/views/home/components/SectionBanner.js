@@ -11,7 +11,11 @@ export const ImageBannerDekstop = styled.img`
 `;
 
 export const ImageBannerMobile = styled.img`
-  ${tw`w-full h-full lg:hidden`}
+  ${tw`w-full h-full md:hidden lg:hidden`}
+`;
+
+export const ImageBannerIpad = styled.img`
+  ${tw`w-full h-full hidden md:block lg:hidden`}
 `;
 
 export const ImageTextWrapperBanner = styled.div`

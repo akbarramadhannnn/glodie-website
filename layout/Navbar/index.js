@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const MenuWrapper = styled.div`
   ${tw`
-    flex justify-between items-center w-full h-14 lg:h-24 pl-5 pr-5 lg:pl-16 lg:pr-16 xl:pl-40 xl:pr-40
+    flex justify-between items-center w-full h-14 md:h-32 lg:h-24 pl-5 pr-5 lg:pl-16 lg:pr-16 xl:pl-40 xl:pr-40
   `}
 `;
 

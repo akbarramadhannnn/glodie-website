@@ -9,7 +9,7 @@ import SeeSvg from "../public/svg/see.svg";
 import CloseSvg from "../public/svg/x.svg";
 import { Head, Image } from "../components";
 
-const Roadmap = (props) => {
+const Roadmap = () => {
   const dataRoadmap = [
     {
       name: "Phase 1",
@@ -139,7 +139,7 @@ const Roadmap = (props) => {
 
   return (
     <Fragment>
-      <Head title="Glodie | Roadmap" urlLink={props.urlPath} />
+      <Head title="Glodie | Roadmap" urlLink="/roadmap" />
 
       <section className="h-12xl lg:h-64 bg-purple1 pl-5 pr-5 lg:pl-16 lg:pr-16 xl:pl-40 xl:pr-40 flex flex-col justify-between items-center pt-12 pb-12 lg:pt-20 lg:pb-20">
         <h1 className="text-4xl lg:text-5xl font-bold text-white">RNB</h1>
@@ -152,9 +152,7 @@ const Roadmap = (props) => {
       <section className="bg-pink1 pl-5 pr-5 lg:pl-16 lg:pr-16 xl:pl-40 xl:pr-40 pt-14 pb-14">
         <div className="flex flex-col justify-between items-center h-24 mb-12">
           <h1 className="text-4xl lg:text-5xl font-bold text-white">Roadmap</h1>
-          <p className="text-xl text-white">
-            (Click to see more details)
-          </p>
+          <p className="text-xl text-white">(Click to see more details)</p>
         </div>
 
         <div className="w-full flex flex-col jutify-end">
@@ -271,9 +269,7 @@ const Roadmap = (props) => {
           <h1 className="text-4xl lg:text-5xl font-bold text-purple1">
             Benefits
           </h1>
-          <p className="text-xl text-purple1">
-            (Click to see more details)
-          </p>
+          <p className="text-xl text-purple1">(Click to see more details)</p>
         </div>
 
         <div className="w-full flex flex-col jutify-end">
@@ -452,10 +448,10 @@ const Roadmap = (props) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  return {
-    props: { urlPath: context.resolvedUrl },
-  };
-}
+// export async function getServerSideProps(context) {
+//   return {
+//     props: { urlPath: context.resolvedUrl },
+//   };
+// }
 
 export default Roadmap;
